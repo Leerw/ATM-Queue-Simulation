@@ -19,11 +19,11 @@ class Model:
         pass
 
     def data_gen(self):
+        # TODO: 产生随机数据
         pass
 
     def result_cal(self, times):
-        # arrive_time[i] = sum(interval_time[0..i-1])
-        for i in range(0, )
+        # TODO: 计算出数据
         pass
 
     def data_pool(self):
