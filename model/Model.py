@@ -1,4 +1,3 @@
-import mysql
 import pymysql
 
 
