@@ -173,6 +173,13 @@ class Model:
         conn.close()
         cursor.close()
 
+    def delete_service(self):
+        pass
+
+    def clean_database(self):
+        pass
+
+
 if __name__ == '__main__':
     """
     This is test code
