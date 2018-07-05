@@ -107,7 +107,6 @@ class Model:
             total_prob = total_prob + every_prob
         return total_prob == 1
 
-
     def connect_db(self):
         config = {'host': '127.0.0.1',
                   'port': 3306,
@@ -118,4 +117,68 @@ class Model:
                   }
         return pymysql.connect(config)
 
-    def 
+    def create_table(self):
+        """
+        arg: self
+        return: none
+        To create a table describes the services for each experiment
+        """
+        conn = self.connect_db()
+        cursor = conn.cursor()
+        sql_createDB = """
+                        CREATE TABLE IF NOT EXISTS serve(
+                        client_id INT UNSIGNED NOT NULL,
+                        arrive_time INT UNSIGNED,
+                        interval_time INT UNSIGNED,
+                        serve_time INT UNSIGNED,
+                        serve_start_time INT UNSIGNED,
+                        wait_time INT UNSIGNED,
+                        serve_end_time INT UNSIGNED,
+                        spend_time INT UNSIGNED,
+                        sys_free_time INT UNSIGNED,
+                        avg_wait_time INT_UNSIGNED,
+                        sys_util INT UNSIGNED,
+                        PRIMARY KEY (client_id)
+                        )ENGINE=InnoDB DEFAULT CHARSET=utf8
+                        """
+        cursor.execute(sql_createDB)
+        conn.commit()
+        conn.close()
+        cursor.close()
+
+    def insert_service(self, service):
+        """
+        arg: self
+             service: a dict, the service item that will be inserted to table serve
+        return: none
+        Insert the item 'service' to table 'serve'
+        """
+        client_id = service['client_id']
+        arrive_time = service['arrive_time']
+        interval_time = service['interval_time']
+        serve_time = service['serve_time']
+        serve_start_time = service['serve_start_time']
+        wait_time = service['wait_time']
+        serve_end_time = service['serve_end_time']
+        spend_time = service['spend_time']
+        sys_free_time = service['sys_free_time']
+        avg_wait_time = service['avg_wait_time']
+        sys_util_time = service['sys_util_time']
+
+        conn = connect_db()
+        cursor = conn.cursor()
+        sql_insert = ""
+                     INSERT INTO serve
+                     (client_id, arrive_time, interval_time, serve_time, serve_start_time, 
+                      wait_time, serve_end_time, spend_time, sys_free_time, avg_wait_time,
+                      sys_util_time
+                     ) 
+                     values
+                     (client_id, arrive_time, interval_time, serve_time, serve_start_time, 
+                      wait_time, serve_end_time, spend_time, sys_free_time, avg_wait_time,
+                      sys_util_time
+                     )
+                     ""
+        cursor.execute(sql_insert)
+        conn.close()
+        cursor.close()
