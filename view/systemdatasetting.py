@@ -7,8 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 
-class Ui_QDialog(object):
+class Ui_Settings(object):
     def setupUi(self, QDialog):
         QDialog.setObjectName("QDialog")
         QDialog.resize(567, 496)
@@ -165,4 +166,3 @@ class Ui_QDialog(object):
         self.Reset_1.setText(_translate("QDialog", "重置"))
         self.Help.setText(_translate("QDialog", "帮助"))
         self.Cancel.setText(_translate("QDialog", "取消"))
-

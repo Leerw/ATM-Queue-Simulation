@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-class Ui_once_run(object):
+class Ui_OnceRun(object):
     def setupUi(self, once_run):
         once_run.setObjectName("once_run")
         once_run.resize(943, 482)
