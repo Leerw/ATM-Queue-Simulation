@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 import pymysql
-=======
 import random
 
 
 import numpy as np
-
->>>>>>> 49cdb18b39f23afddede2dd3ac96030857ef02be
 
 
 class Model:
@@ -98,10 +94,10 @@ class Model:
                 self.spend_time, self.sys_free_time,
                 self.avg_wait_time, self.sys_util}
 
-    # def connect_db(self):
-    #     return pymysql.connect(host='127.0.0.1',
-    #                            port=3306,
-    #                            user='root',
-    #                            password='Qaz520..',
-    #                            database='xxq',
-    #                            charset='utf8')
+    def connect_db(self):
+        return pymysql.connect(host='127.0.0.1',
+                               port=3306,
+                               user='root',
+                               password='Qaz520..',
+                               database='xxq',
+                               charset='utf8')
