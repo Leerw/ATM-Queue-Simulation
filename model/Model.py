@@ -112,10 +112,10 @@ class Model:
                   'port': 3306,
                   'user': 'root',
                   'password': 'Qaz520..',
-                  'database': 'xxq',
+                  'db': 'xxq',
                   'charset': 'utf8'
                   }
-        return pymysql.connect(config)
+        return pymysql.connect(**config)
 
     def create_table(self):
         """
@@ -136,7 +136,7 @@ class Model:
                         serve_end_time INT UNSIGNED,
                         spend_time INT UNSIGNED,
                         sys_free_time INT UNSIGNED,
-                        avg_wait_time INT_UNSIGNED,
+                        avg_wait_time INT UNSIGNED,
                         sys_util INT UNSIGNED,
                         PRIMARY KEY (client_id)
                         )ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -153,21 +153,43 @@ class Model:
         return: none
         Insert the item 'service' to table 'serve'
         """
+        cols = ', '.join(service.keys())
         data = service.values()
+        marks = ', '.join(['%s'] * len(service))
+
+        data = list(data)
+        for i in range(len(data)):
+            data[i] = int(data[i])
 
         conn = self.connect_db()
         cursor = conn.cursor()
-        sql_insert = """
-                     INSERT INTO serve
-                     (
-                     client_id, arrive_time, interval_time, serve_time, serve_start_time, 
-                     wait_time, serve_end_time, spend_time, sys_free_time, avg_wait_time,
-                     sys_util_time
-                     ) 
-                     VALUES
-                     ('%d', '%d', '%d','%d', '%d', '%d','%d', '%d', '%d','%d', '%d')
-                     """
-        
-        cursor.execute(sql_insert % data)
+        sql_insert = "INSERT INTO serve (%s) VALUES (%s)" % (cols, marks)
+        try:
+            cursor.execute(sql_insert, data)
+            conn.commit()
+        except:
+            # 失败回滚
+            conn.rollback()
         conn.close()
         cursor.close()
+
+if __name__ == '__main__':
+    """
+    This is test code
+    """
+    model = Model()
+    model.create_table()
+    service = {
+        'client_id' : 1,
+        'arrive_time' : 1,
+        'interval_time' : 1,
+        'serve_time' : 1,
+        'serve_start_time' : 1,
+        'wait_time' : 1,
+        'serve_end_time' : 1,
+        'spend_time' : 1,
+        'sys_free_time' : 1,
+        'avg_wait_time' : 1,
+        'sys_util' : 1
+    }
+    model.insert_service(service)
