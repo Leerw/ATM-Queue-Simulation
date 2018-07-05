@@ -25,16 +25,16 @@ class Model:
         tmp = True
         y = []
         lam = (max + min) / 2
-        while (tmp):
+        while tmp:
             time_list = np.random.poisson(lam, size=num).tolist()
             for i in time_list:
-                if (i > max or i < min):
+                if i > max or i < min:
                     time_list.remove(i)
             y = y + time_list
             if len(y) >= num:
                 tmp = False
 
-        if (len(y) > num):
+        if len(y) > num:
             for i in range(num, len(y)):
                 y.remove(i)
 
@@ -43,7 +43,7 @@ class Model:
 
         #下面是生成服务时间的随机值
         seq = [1,2,3,4,5,6]
-        while(len(self.serve_time)!=num):
+        while len(self.serve_time)!=num:
             z = random.uniform(0, 1)
             cumprob = 0.0
             for item, item_pro in zip(seq, probabilities):
@@ -93,6 +93,19 @@ class Model:
                 self.wait_time, self.serve_end_time,
                 self.spend_time, self.sys_free_time,
                 self.avg_wait_time, self.sys_util}
+
+    def data_check(self, probabilities, max_arr_time, min_arr_time, num_people):
+        """  对数据进行检查.  """
+        if len(probabilities) != 6 or num_people <= 1:
+            return False
+        if min_arr_time < 0 or max_arr_time < min_arr_time:
+            return False
+        total_prob = 0.0
+        for every_prob in probabilities:
+            if every_prob < 0 or every_prob > 1:
+                return False
+            total_prob = total_prob + every_prob
+        return total_prob == 1
 
     def connect_db(self):
         return pymysql.connect(host='127.0.0.1',
