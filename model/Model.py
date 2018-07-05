@@ -153,32 +153,21 @@ class Model:
         return: none
         Insert the item 'service' to table 'serve'
         """
-        client_id = service['client_id']
-        arrive_time = service['arrive_time']
-        interval_time = service['interval_time']
-        serve_time = service['serve_time']
-        serve_start_time = service['serve_start_time']
-        wait_time = service['wait_time']
-        serve_end_time = service['serve_end_time']
-        spend_time = service['spend_time']
-        sys_free_time = service['sys_free_time']
-        avg_wait_time = service['avg_wait_time']
-        sys_util_time = service['sys_util_time']
+        data = service.values()
 
-        conn = connect_db()
+        conn = self.connect_db()
         cursor = conn.cursor()
-        sql_insert = ""
+        sql_insert = """
                      INSERT INTO serve
-                     (client_id, arrive_time, interval_time, serve_time, serve_start_time, 
-                      wait_time, serve_end_time, spend_time, sys_free_time, avg_wait_time,
-                      sys_util_time
+                     (
+                     client_id, arrive_time, interval_time, serve_time, serve_start_time, 
+                     wait_time, serve_end_time, spend_time, sys_free_time, avg_wait_time,
+                     sys_util_time
                      ) 
-                     values
-                     (client_id, arrive_time, interval_time, serve_time, serve_start_time, 
-                      wait_time, serve_end_time, spend_time, sys_free_time, avg_wait_time,
-                      sys_util_time
-                     )
-                     ""
-        cursor.execute(sql_insert)
+                     VALUES
+                     ('%d', '%d', '%d','%d', '%d', '%d','%d', '%d', '%d','%d', '%d')
+                     """
+        
+        cursor.execute(sql_insert % data)
         conn.close()
         cursor.close()
