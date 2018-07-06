@@ -127,7 +127,7 @@ class Model:
         cursor = conn.cursor()
         sql_createDB = """
                         CREATE TABLE IF NOT EXISTS serve(
-                        client_id INT UNSIGNED NOT NULL,
+                        client_id INT UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,
                         arrive_time INT UNSIGNED,
                         interval_time INT UNSIGNED,
                         serve_time INT UNSIGNED,
@@ -222,6 +222,7 @@ if __name__ == '__main__':
     """
     This is test code
     """
+    """
     model = Model()
     model.create_table()
     service = {
@@ -238,3 +239,4 @@ if __name__ == '__main__':
         'sys_util' : 1
     }
     model.insert_service(service)
+    """
