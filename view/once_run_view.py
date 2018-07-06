@@ -9,7 +9,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-class Ui_OnceRun(object):
+
+class Ui_OnceRun(QtWidgets.QWidget):
     def setupUi(self, once_run):
         once_run.setObjectName("once_run")
         once_run.resize(943, 482)
@@ -100,4 +101,3 @@ class Ui_OnceRun(object):
         self.finish_btn.setText(_translate("once_run", "完成"))
         self.clr_cache_btn.setText(_translate("once_run", "清除缓存数据"))
         self.once_run_btn.setText(_translate("once_run", "运行一次"))
-
