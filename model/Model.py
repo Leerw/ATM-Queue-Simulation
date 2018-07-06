@@ -127,7 +127,7 @@ class Model:
         cursor = conn.cursor()
         sql_createDB = """
                         CREATE TABLE IF NOT EXISTS serve(
-                        client_id INT UNSIGNED NOT NULL,
+                        client_id INT UNSIGNED NOT NULL AUTO_INCREMENT  PRIMARY KEY,
                         arrive_time INT UNSIGNED,
                         interval_time INT UNSIGNED,
                         serve_time INT UNSIGNED,
@@ -141,8 +141,12 @@ class Model:
                         PRIMARY KEY (client_id)
                         )ENGINE=InnoDB DEFAULT CHARSET=utf8
                         """
-        cursor.execute(sql_createDB)
-        conn.commit()
+        try:
+            cursor.execute(sql_createDB)
+            conn.commit()
+        except:
+            conn.rollback()
+            print("Exception: create table failed!")
         conn.close()
         cursor.close()
 
@@ -170,19 +174,54 @@ class Model:
         except:
             # 失败回滚
             conn.rollback()
+            print("Exception: insert service failed!")
         conn.close()
         cursor.close()
 
-    def delete_service(self):
+    def delete_service(self, client_id):
+        """
+        :param client_id: the primary key that to be deleted
+        :return: none
+        To delete a service item whose primary key is client_id
+        """
+        sql_delete = "DELETE FROM xxq where client_id = \"%s\"" % client_id
+        conn = self.connect_db()
+        cursor = conn.cursor()
+        try:
+            cursor.execute(sql_delete)
+            conn.commit()
+        except:
+            conn.rollback()
+            print("Exception: delete service failed!")
+        conn.close()
+        cursor.close()
         pass
 
     def clean_database(self):
+        """
+        arg: self
+        return: none
+        Clean the table `xxq`
+        """
+        sql_drop_table = "DROP TABLE xxq"
+        conn = self.connect_db()
+        cursor = conn.cursor()
+        try:
+            cursor.execute(sql_drop_table)
+            conn.commit()
+            self.create_table()
+        except:
+            conn.rollback()
+            print("Exception: clean database failed!")
+        conn.close()
+        cursor.close()
         pass
 
 
 if __name__ == '__main__':
     """
     This is test code
+    """
     """
     model = Model()
     model.create_table()
@@ -200,3 +239,4 @@ if __name__ == '__main__':
         'sys_util' : 1
     }
     model.insert_service(service)
+    """

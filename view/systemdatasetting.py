@@ -5,11 +5,22 @@
 # Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
-
-from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+import re
 
-class Ui_Settings(object):
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QMessageBox, QApplication, QWidget
+
+sys.path.append("..")
+from model.Model import *
+
+
+class Ui_QDialog(QWidget):
+    model1 = Model()
+    probailities_data = []
+    num_people = 0
+    time_max = 0
+    time_min = 0
     def setupUi(self, QDialog):
         QDialog.setObjectName("QDialog")
         QDialog.resize(567, 496)
@@ -42,6 +53,8 @@ class Ui_Settings(object):
         self.label_9 = QtWidgets.QLabel(QDialog)
         self.label_9.setGeometry(QtCore.QRect(40, 430, 16, 16))
         self.label_9.setObjectName("label_9")
+
+        #PCusSer是输入概率的窗口  CPCusSer是累计概率窗口
         self.PCusSer1 = QtWidgets.QLineEdit(QDialog)
         self.PCusSer1.setGeometry(QtCore.QRect(100, 110, 41, 21))
         self.PCusSer1.setObjectName("PCusSer1")
@@ -84,6 +97,8 @@ class Ui_Settings(object):
         self.CPCusSer6.setGeometry(QtCore.QRect(180, 430, 41, 21))
         self.CPCusSer6.setReadOnly(True)
         self.CPCusSer6.setObjectName("CPCusSer6")
+
+        #说明文字
         self.label_10 = QtWidgets.QLabel(QDialog)
         self.label_10.setGeometry(QtCore.QRect(310, 40, 171, 20))
         self.label_10.setObjectName("label_10")
@@ -96,32 +111,53 @@ class Ui_Settings(object):
         self.label_13 = QtWidgets.QLabel(QDialog)
         self.label_13.setGeometry(QtCore.QRect(290, 250, 72, 15))
         self.label_13.setObjectName("label_13")
+
+        #划线
         self.line = QtWidgets.QFrame(QDialog)
         self.line.setGeometry(QtCore.QRect(246, 50, 51, 161))
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
+
+        #数据检查和确认button
         self.DateInspection = QtWidgets.QPushButton(QDialog)
         self.DateInspection.setGeometry(QtCore.QRect(290, 360, 111, 28))
         self.DateInspection.setObjectName("DateInspection")
+
+
+        #重置button
         self.Reset_1 = QtWidgets.QPushButton(QDialog)
         self.Reset_1.setGeometry(QtCore.QRect(450, 360, 61, 28))
         self.Reset_1.setObjectName("Reset_1")
+
+
+        #帮助button
         self.Help = QtWidgets.QPushButton(QDialog)
         self.Help.setGeometry(QtCore.QRect(290, 430, 61, 28))
         self.Help.setObjectName("Help")
+        self.Help.setCheckable(True)
+
+
+        #取消button
         self.Cancel = QtWidgets.QPushButton(QDialog)
         self.Cancel.setGeometry(QtCore.QRect(450, 430, 61, 28))
         self.Cancel.setObjectName("Cancel")
+
+
+        #到达时间的最大最小值
         self.arrive_timemax = QtWidgets.QLineEdit(QDialog)
         self.arrive_timemax.setGeometry(QtCore.QRect(370, 110, 91, 21))
         self.arrive_timemax.setObjectName("arrive_timemax")
         self.arrive_timemin = QtWidgets.QLineEdit(QDialog)
         self.arrive_timemin.setGeometry(QtCore.QRect(370, 170, 91, 21))
         self.arrive_timemin.setObjectName("arrive_timemin")
+
+        #人数
         self.NumOfPeo = QtWidgets.QLineEdit(QDialog)
         self.NumOfPeo.setGeometry(QtCore.QRect(370, 250, 91, 21))
         self.NumOfPeo.setObjectName("NumOfPeo")
+
+        #划线
         self.line_2 = QtWidgets.QFrame(QDialog)
         self.line_2.setGeometry(QtCore.QRect(480, 50, 61, 161))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
@@ -146,6 +182,8 @@ class Ui_Settings(object):
         self.retranslateUi(QDialog)
         QtCore.QMetaObject.connectSlotsByName(QDialog)
 
+        QDialog.show()
+
     def retranslateUi(self, QDialog):
         _translate = QtCore.QCoreApplication.translate
         QDialog.setWindowTitle(_translate("QDialog", "系统数据设置"))
@@ -166,3 +204,7 @@ class Ui_Settings(object):
         self.Reset_1.setText(_translate("QDialog", "重置"))
         self.Help.setText(_translate("QDialog", "帮助"))
         self.Cancel.setText(_translate("QDialog", "取消"))
+
+
+
+

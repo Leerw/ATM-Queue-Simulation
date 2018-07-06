@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Dialog</class>
  <widget class="QDialog" name="Dialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +16,7 @@
   <property name="windowTitle">
    <string>重复实验</string>
   </property>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="tableWidget_avg_wait">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -65,7 +68,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_repeat_time">
    <property name="geometry">
     <rect>
      <x>570</x>
@@ -88,7 +91,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="determine">
+  <widget class="QPushButton" name="Verify">
    <property name="geometry">
     <rect>
      <x>810</x>
@@ -101,7 +104,7 @@
     <string>确定</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_lab_data">
    <property name="geometry">
     <rect>
      <x>580</x>
@@ -114,7 +117,10 @@
     <string>实验数据</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="NumOfDate">
+  <widget class="QLineEdit" name="NumOfData">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>580</x>
@@ -127,7 +133,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="label_avg">
    <property name="geometry">
     <rect>
      <x>640</x>
@@ -140,7 +146,7 @@
     <string>次实验平均值：</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="label_min">
    <property name="geometry">
     <rect>
      <x>680</x>
@@ -153,7 +159,7 @@
     <string>最小值：</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="label_max">
    <property name="geometry">
     <rect>
      <x>680</x>
@@ -167,6 +173,9 @@
    </property>
   </widget>
   <widget class="QLineEdit" name="AverageDate">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>750</x>
@@ -179,7 +188,10 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="MinDate">
+  <widget class="QLineEdit" name="MinData">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>750</x>
@@ -192,7 +204,10 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="MaxDate">
+  <widget class="QLineEdit" name="MaxData">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>750</x>
@@ -205,7 +220,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="Reset_2">
+  <widget class="QPushButton" name="Reset">
    <property name="geometry">
     <rect>
      <x>590</x>
@@ -244,7 +259,7 @@
     <string>帮助</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="label_last_result">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -257,7 +272,7 @@
     <string>最后一次试验结果：</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="tableWidget_2">
+  <widget class="QTableWidget" name="tableWidget_last_result">
    <property name="geometry">
     <rect>
      <x>30</x>
