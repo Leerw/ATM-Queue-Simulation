@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 
 from view.systemdatasetting import *
-from view.RunningTimes import *
+from view.running_times import *
 
 
 
