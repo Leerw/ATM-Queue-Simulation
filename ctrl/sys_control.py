@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 
 from view.systemdatasetting import *
-from view.running_times import *
+from ctrl.runtime_control import *
 
 
 
@@ -89,7 +89,7 @@ class Systemdatasetting(Ui_QDialog):
         '''
         self.QDialog.hide()
         form1 = QtWidgets.QDialog()
-        ui = Ui_Dialog()
+        ui = Runningtime()
         ui.setupUi(form1)
         form1.show()
         form1.exec()
