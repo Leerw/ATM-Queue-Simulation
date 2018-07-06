@@ -5,9 +5,6 @@ from view.once_run_view import *
 from view.repeat_run import *
 from view.systemdatasetting import *
 
-
-
-
 class Systemdatasetting(Ui_QDialog):
     def setupUi(self, QDialog2):
         Ui_QDialog.setupUi(self,QDialog2)

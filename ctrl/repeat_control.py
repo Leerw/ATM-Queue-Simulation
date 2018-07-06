@@ -1,11 +1,15 @@
 from view.repeat_run import *
 from model.Model import *
+from .sys_control import Systemdatasetting
 
 class RepeatControl(Ui_RepeatRun):
 
     def __init__(self):
         super.__init__()
-        model = Model()
+        self.model = Model()
+        self.sys_settings = Systemdatasetting()
+        self.repeat_time = 0
+        self.num_people = 0
 
     def setupUi(self, Dialog):
         Ui_RepeatRun.setupUi(self, Dialog)
@@ -19,6 +23,9 @@ class RepeatControl(Ui_RepeatRun):
         Show all the result in the two widgets at top-left and bottom
         :return:
         """
+        self.repeat_time = self.Repetitions.text()
+        self.num_people = self.sys_settings.num_people
+
         pass
 
     def reset(self):
