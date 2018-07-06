@@ -88,11 +88,11 @@ class Model:
         self.sys_util = serve_time / all_time  # 系统利用率 = 系统服务总时间 / 系统总运行时间
 
     def data_pool(self):
-        return {self.arrive_time, self.interval_time,
+        return [self.interval_time, self.arrive_time,
                 self.serve_time, self.serve_start_time,
                 self.wait_time, self.serve_end_time,
                 self.spend_time, self.sys_free_time,
-                self.avg_wait_time, self.sys_util}
+                self.avg_wait_time, self.sys_util]
 
     def data_check(self, probabilities, max_arr_time, min_arr_time, num_people):
         """  对数据进行检查.  """
