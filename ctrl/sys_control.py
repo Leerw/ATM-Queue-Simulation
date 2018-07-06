@@ -1,20 +1,20 @@
 import sys
 sys.path.append("..")
-from model.Model import *
-from view.once_run_view import *
-from view.repeat_run import *
+
 from view.systemdatasetting import *
+from view.running_times import *
 
 
 
 
 class Systemdatasetting(Ui_QDialog):
-    def setupUi(self, QDialog2):
-        Ui_QDialog.setupUi(self,QDialog2)
+    def setupUi(self, QDialog):
+        Ui_QDialog.setupUi(self,QDialog)
         self.DateInspection.clicked.connect(self.data_check_f)
         self.Reset_1.clicked.connect(self.Reset_f)
         self.Help.clicked.connect(self.Help_f)
         self.Cancel.clicked.connect(self.Cancel_f)
+        self.QDialog = QDialog
 
     def data_check_f(self):
         probability_data = [self.PCusSer1.text(), self.PCusSer2.text(), self.PCusSer3.text(),
@@ -33,6 +33,7 @@ class Systemdatasetting(Ui_QDialog):
                 break
             else:
                 probability_data[i] = float(probability_data[i])
+
 
         if result != False:
             for i in [time_min, time_max, num_people]:
@@ -56,8 +57,49 @@ class Systemdatasetting(Ui_QDialog):
             self.time_min = time_min
             self.time_max = time_max
             self.num_people = num_people
+            #下面是界面更新
+            tmp = probability_data[0]
+            tmp = round(tmp,1)
+            self.CPCusSer1.setText(str(tmp))
+            tmp += probability_data[1]
+            tmp = round(tmp, 1)
+            self.CPCusSer2.setText(str(tmp))
+            tmp += probability_data[2]
+            tmp = round(tmp, 1)
+            self.CPCusSer3.setText(str(tmp))
+            tmp += probability_data[3]
+            tmp = round(tmp, 1)
+            self.CPCusSer4.setText(str(tmp))
+            tmp += probability_data[4]
+            tmp = round(tmp, 1)
+            self.CPCusSer5.setText(str(tmp))
+            tmp += probability_data[5]
+            tmp = round(tmp, 1)
+            self.CPCusSer6.setText(str(tmp))
+
+            #界面跳转
+            self.jump_to_runningtimes()
+
+
+
+    def jump_to_runningtimes(self):
+        '''
+        界面跳转函数
+        :return:
+        '''
+        self.QDialog.hide()
+        form1 = QtWidgets.QDialog()
+        ui = Ui_Dialog()
+        ui.setupUi(form1)
+        form1.show()
+        form1.exec()
+        self.QDialog.show()
 
     def Help_f(self):
+        '''
+
+        :return:
+        '''
         pass
 
     def Reset_f(self):
@@ -80,7 +122,7 @@ class Systemdatasetting(Ui_QDialog):
 
         self.NumOfPeo.setText("10")
 
-        self.data_check_f()
+#        self.jump_to_runningtimes()
 
     def Cancel_f(self):
         pass
