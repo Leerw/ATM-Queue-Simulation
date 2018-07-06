@@ -88,7 +88,7 @@ class Model:
         self.sys_util = serve_time / all_time  # 系统利用率 = 系统服务总时间 / 系统总运行时间
 
     def data_pool(self):
-        return [self.interval_time, self.arrive_time
+        return [self.interval_time, self.arrive_time,
                 self.serve_time, self.serve_start_time,
                 self.wait_time, self.serve_end_time,
                 self.spend_time, self.sys_free_time,
