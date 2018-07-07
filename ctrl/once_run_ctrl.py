@@ -24,15 +24,23 @@ class OnceRunCtrl(Ui_OnceRun):
         self.close()
         exit(0)
 
+    def get_data(self, num, max, min, probabilities):
+        self.num = num
+        self.max = max
+        self.min = min
+        self.probabilities = probabilities
+
+
+
     def once_run(self):
         self.clr_cache()
         m = Model()
-        m.data_gen(10, 5, 12, [0.1, 0.1, 0.2, 0.2, 0.2, 0.2])
+        m.data_gen(int(self.num),int(self.max),int(self.min),self.probabilities)
         m.result_cal(10)
         r = m.data_pool()
         col_count = self.once_run_table.columnCount()
         self.once_run_table.removeRow(0)
-        for j in range(len(r[0]) - 1):
+        for j in range(len(r[0])):
             self.once_run_table.insertRow(j)
             item = QTableWidgetItem()
             item.setText(str(j + 1))
