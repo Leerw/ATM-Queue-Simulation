@@ -28,7 +28,7 @@ class Systemdatasetting(Ui_QDialog):
 
         for i in range(0, 6):
             tmp = value.match(probability_data[i])
-            if tmp == False:
+            if tmp == False or tmp == None:
                 result = False
                 break
             else:
@@ -41,12 +41,13 @@ class Systemdatasetting(Ui_QDialog):
                 if tmp == False:
                     result = False
                     break
+            time_max = float(time_max)
+            time_min = float(time_min)
+            num_people = float(num_people)
 
-        time_max = float(time_max)
-        time_min = float(time_min)
-        num_people = float(num_people)
 
-        if self.model1.data_check(probability_data, time_max, time_min, num_people) == False or result == False:
+
+        if result == False or self.model1.data_check(probability_data, time_max, time_min, num_people) == False:
             reply = QMessageBox.warning(self,  # 使用infomation信息框
                                         "警告",
                                         "数据输入有误",
@@ -91,6 +92,7 @@ class Systemdatasetting(Ui_QDialog):
         form1 = QtWidgets.QDialog()
         ui = Runningtime()
         ui.setupUi(form1)
+        ui.get_data(self.num_people,self.time_max,self.time_min,self.probailities_data)
         form1.show()
         form1.exec()
         self.QDialog.show()

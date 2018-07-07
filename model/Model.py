@@ -58,6 +58,7 @@ class Model:
         self.serve_end_time.append(self.serve_time[0]+self.arrive_time[0])
         self.interval_time.append(0)
         self.serve_start_time.append(0)
+        self.sys_free_time.append(0)
         # 对后面的进行数据添加
         for i in range(1, num):
             wait_time = self.serve_end_time[i - 1] - \
@@ -73,6 +74,7 @@ class Model:
                                        .serve_time[i])  # 结束时间=等待时间+到达时间+服务时间
         wait_time = 0
         serve_time = self.serve_time[0]
+        self.spend_time.append(self.wait_time[0]+self.serve_time[0])
         for i in range(1, num):
             self.serve_start_time.append(
                 self.arrive_time[i] + self.wait_time[i])  # 开始时间=到达时间+等待时间
