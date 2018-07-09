@@ -24,10 +24,11 @@ class Runningtime(Ui_Dialog):
     # self.Dialog.show()
 
     def jump_to_repeat(self):
-        self.Dialog.hide()
         form = QtWidgets.QDialog()
         ui = RepeatControl(self.num, self.max, self.min, self.probabilities)
         ui.setupUi(form)
+        ui.setup_function(form)
+        ui.get_data(self.num, self.max, self.min, self.probabilities)
         form.show()
         form.exec()
         self.Dialog.show()
