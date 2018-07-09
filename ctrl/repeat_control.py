@@ -33,7 +33,7 @@ class RepeatControl(Ui_RepeatRun):
         flag = re.match(r"\d*$", s)
         if s is "" or flag is None:
             QMessageBox.information(self,
-                                    "错误",
+                                    "警告",
                                     "次数输入错误，请重新输入",
                                     QMessageBox.Cancel)
             self.Repetitions.clear()
