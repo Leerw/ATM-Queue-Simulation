@@ -3,6 +3,7 @@ sys.path.append("..")
 
 from view.systemdatasetting import *
 from ctrl.runtime_control import *
+from ctrl.sys_help_control import *
 
 
 
@@ -13,7 +14,7 @@ class Systemdatasetting(Ui_QDialog):
         self.DateInspection.clicked.connect(self.data_check_f)
         self.Reset_1.clicked.connect(self.Reset_f)
         self.Help.clicked.connect(self.Help_f)
-        self.Cancel.clicked.connect(self.Cancel_f)
+        self.Cancel.clicked.connect(QCoreApplication.instance().quit)
         self.QDialog = QDialog
 
     def data_check_f(self):
@@ -85,7 +86,7 @@ class Systemdatasetting(Ui_QDialog):
 
     def jump_to_runningtimes(self):
         '''
-        界面跳转函数
+        界面跳转次数函数
         :return:
         '''
         self.QDialog.hide()
@@ -99,10 +100,16 @@ class Systemdatasetting(Ui_QDialog):
 
     def Help_f(self):
         '''
-
+        帮助函数，跳转到帮助界面，查看对数据的要求
         :return:
         '''
-        pass
+        form2 = QDialog()
+        ui = Sys_help()
+        ui.setupUi(form2)
+        form2.show()
+        form2.exec()
+
+
 
     def Reset_f(self):
         self.PCusSer1.setText(str(0.1))
@@ -126,8 +133,7 @@ class Systemdatasetting(Ui_QDialog):
 
 #        self.jump_to_runningtimes()
 
-    def Cancel_f(self):
-        pass
+
 
 
 if __name__ == "__main__":
