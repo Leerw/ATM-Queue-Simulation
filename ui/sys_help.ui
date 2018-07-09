@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>syshelp</class>
+ <widget class="QDialog" name="syshelp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>-20</y>
+     <width>391</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;数据要求如下:&lt;/p&gt;&lt;p&gt;概率p：0&amp;lt;= p &amp;lt;=1 p为保留一位的小数，6个概率p之和为1&lt;/p&gt;&lt;p&gt;到达间隔时间最小值min：min &amp;gt;= 0&lt;/p&gt;&lt;p&gt;到达间隔时间最小值max：max &amp;gt;= 0 且 max &amp;gt; min&lt;/p&gt;&lt;p&gt;人数num： num &amp;gt; 0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="verify">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>230</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
