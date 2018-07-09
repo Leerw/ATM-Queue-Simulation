@@ -35,8 +35,7 @@ class Model:
                 tmp = False
 
         if len(y) > num:
-            for i in range(num, len(y)):
-                y.remove(i)
+            y = y[:num]
 
         y.sort()
         self.arrive_time = y

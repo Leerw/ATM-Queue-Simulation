@@ -5,14 +5,12 @@ from .sys_control import Systemdatasetting
 class RepeatControl(Ui_RepeatRun):
 
     def __init__(self):
-        super.__init__()
         self.model = Model()
         self.sys_settings = Systemdatasetting()
         self.repeat_time = 0
         self.num_people = 0
 
-    def setupUi(self, Dialog):
-        Ui_RepeatRun.setupUi(self, Dialog)
+    def setupFun(self, Dialog):
         self.Verify.clicked.connect(self.verify())
         self.Reset.clicked.connect(self.reset())
         self.Finish.clicked.connect(self.finish())

@@ -22,7 +22,6 @@ class Runningtime(Ui_Dialog):
        # self.Dialog.show()
 
     def jump_to_repeat(self):
-        self.Dialog.hide()
         form = QtWidgets.QDialog()
         ui = RepeatControl()
         ui.setupUi(form)
