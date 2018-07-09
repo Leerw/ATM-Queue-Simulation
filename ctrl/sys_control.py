@@ -8,6 +8,7 @@ from ctrl.runtime_control import *
 
 
 class Systemdatasetting(Ui_QDialog):
+
     def setupUi(self, QDialog):
         Ui_QDialog.setupUi(self,QDialog)
         self.DateInspection.clicked.connect(self.data_check_f)

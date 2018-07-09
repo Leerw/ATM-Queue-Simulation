@@ -25,6 +25,8 @@ class Runningtime(Ui_Dialog):
         form = QtWidgets.QDialog()
         ui = RepeatControl()
         ui.setupUi(form)
+        ui.setup_function(form)
+        ui.get_data(self.num, self.max, self.min, self.probabilities)
         form.show()
         form.exec()
         self.Dialog.show()
