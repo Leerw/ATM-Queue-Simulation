@@ -44,27 +44,28 @@ class RepeatControl(Ui_RepeatRun):
         lab_avg = {}
         lab_result = {}
         for time in range(1, self.repeat_time + 1):
+            self.model.reset()
             self.model.data_gen(self.num_people, self.max, self.min, self.probabilities)
             self.model.result_cal(self.num_people)
             r = self.model.data_pool()
             lab_avg[time] = r[-2]
             lab_result[time] = r
-        lab_avg_keys = lab_avg.keys()
-        lab_avg_values = lab_avg.values()
+        lab_avg_keys = list(lab_avg.keys())
+        lab_avg_values = list(lab_avg.values())
         lab_final_result = lab_result[self.repeat_time]
-        final_avg = np.mean(lab_avg_values)
-        final_min = np.min(lab_avg_values)
-        final_max = np.max(lab_avg_values)
+        final_avg = round(np.mean(lab_avg_values), 1)
+        final_min = round(np.min(lab_avg_values), 1)
+        final_max = round(np.max(lab_avg_values), 1)
         # show the results
         # insert [lab_avg_keys, lab_avg_values] into tableWidget_avg_wait
         # insert lab_final_result into tableWidget_last_result
         # show final_avg in AverageDate
         # show final_min in MinData
         # show final_max in MaxData
-        self.NumOfData.setText(self.repeat_time)
-        self.AverageDate.setText(final_avg)
-        self.MinData.setText(final_min)
-        self.MaxData.setText(final_max)
+        self.NumOfData.setText(str(self.repeat_time))
+        self.AverageDate.setText(str(final_avg))
+        self.MinData.setText(str(final_min))
+        self.MaxData.setText(str(final_max))
         
         pass
 
