@@ -61,6 +61,10 @@ class RepeatControl(Ui_RepeatRun):
         # show final_avg in AverageDate
         # show final_min in MinData
         # show final_max in MaxData
+        self.NumOfData.setText(self.repeat_time)
+        self.AverageDate.setText(final_avg)
+        self.MinData.setText(final_min)
+        self.MaxData.setText(final_max)
         
         pass
 
