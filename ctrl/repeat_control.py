@@ -15,12 +15,25 @@ class RepeatControl(Ui_RepeatRun):
         self.probabilities = []
 
     def setup_function(self, Dialog):
+        """
+        Connect clicked funciton to view widgets
+        :param Dialog:
+        :return: None
+        """
         self.Verify.clicked.connect(self.verify)
         self.Reset.clicked.connect(self.reset)
         self.Finish.clicked.connect(self.finish)
         self.Help.clicked.connect(self.help)
 
     def get_data(self, num_people, max, min, probabilities):
+        """
+        Get data from sys_settings
+        :param num_people:
+        :param max:
+        :param min:
+        :param probabilities:
+        :return: None
+        """
         self.num_people = int(num_people)
         self.max = int(max)
         self.min = int(min)
