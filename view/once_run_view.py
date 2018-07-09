@@ -12,6 +12,7 @@ import sys
 
 class Ui_OnceRun(QtWidgets.QWidget):
     def setupUi(self, once_run):
+        self.dialog1 = once_run
         once_run.setObjectName("once_run")
         once_run.resize(943, 482)
         self.once_run_table = QtWidgets.QTableWidget(once_run)
