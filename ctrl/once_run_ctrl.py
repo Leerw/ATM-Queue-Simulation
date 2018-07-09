@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QTableWidgetItem, QDialog
 from view.once_run_view import Ui_OnceRun
 from model.Model import Model
+from ctrl.once_help_control import Oncehelp
 
 
 class OnceRunCtrl(Ui_OnceRun):
@@ -21,8 +22,8 @@ class OnceRunCtrl(Ui_OnceRun):
         self.avg_txt.clear()
 
     def finish(self):
-        self.close()
-        exit(0)
+        self.dialog1.close()
+
 
     def get_data(self, num, max, min, probabilities):
         self.num = num
@@ -56,7 +57,8 @@ class OnceRunCtrl(Ui_OnceRun):
         self.sys_use_txt.setText(str(r[9]))
 
     def help(self):
-        d = QDialog()
-        d.show()
-
-        d.exec_()
+        help_dialog  = QDialog()
+        ui = Oncehelp()
+        ui.setupUi(help_dialog)
+        help_dialog.show()
+        help_dialog.exec()
