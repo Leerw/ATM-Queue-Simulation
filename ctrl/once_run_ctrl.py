@@ -10,6 +10,10 @@ class OnceRunCtrl(Ui_once_run):
         self.max = max_num
         self.min = min_num
         self.probabilities = probabilities
+        self.service = {}
+        self.group_items = {}
+        self.service_keys = []
+        self.group_items_keys = []
 
     def setupUi(self, once_run):
         '''
@@ -54,17 +58,19 @@ class OnceRunCtrl(Ui_once_run):
         m = Model()
         m.data_gen(int(self.num), int(self.max), int(self.min), self.probabilities)
         m.result_cal(int(self.num))
-        r = m.data_pool()
+        self.service, self.group_items = m.data_pool()
+        self.service_keys = list(self.service.keys())
+        self.group_items_keys = list(self.group_items.keys())
         col_count = self.once_run_table.columnCount()
         self.once_run_table.removeRow(0)
-        for j in range(len(r[0])):
+        for j in range(len(self.service[self.service_keys[0]])):
             self.once_run_table.insertRow(j)
             self.once_run_table.setVerticalHeaderItem(j, QTableWidgetItem(str(j + 1)))
             self.once_run_table.setItem(j, 0, QTableWidgetItem(str(j + 1)))
             for i in range(1, col_count):
-                self.once_run_table.setItem(j, i, QTableWidgetItem(str(r[i - 1][j])))
-        self.avg_txt.setText(str(r[8]))
-        self.sys_use_txt.setText(str(r[9]))
+                self.once_run_table.setItem(j, i, QTableWidgetItem(str(self.service[self.service_keys[i - 1]][j])))
+        self.avg_txt.setText(str(self.group_items[self.group_items_keys[0]]))
+        self.sys_use_txt.setText(str(self.group_items[self.group_items_keys[1]]))
 
     def help(self):
         '''
