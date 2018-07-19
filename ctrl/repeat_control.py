@@ -1,11 +1,14 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox, QWidget, QDialog
-
-from model.Model import *
-from view.repeat_run import *
 import re
 import sys
+
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox, QDialog
+
+from view.repeat_run import *
+
 sys.path.append("..")
 from ctrl.repeat_help_control import *
+from model.Model import *
+
 
 class RepeatControl(Ui_RepeatRun):
     def __init__(self, num_people, max_avg, min_avg, probabilities, parent=None):
@@ -21,6 +24,19 @@ class RepeatControl(Ui_RepeatRun):
         self.min = min_avg
         self.probabilities = probabilities
         self.avg_list = []
+        self.service = {}
+        self.group_items = {}
+        self.service_keys = []
+        self.group_items_keys = []
+
+    def saveDatabase(self):
+        self.model.insert_group_data(self.group_items)
+        for i in range(len(self.service[self.service_keys[0]])):
+            temp = {}
+            for j in range(len(self.service)):
+                temp[self.service_keys[j]] = self.service[self.service_keys[j]][i]
+            temp["group_id"] = self.model.read_group_id()[0]
+            self.model.insert_service(temp)
 
     def setupUi(self, dialog):
         """
@@ -50,8 +66,10 @@ class RepeatControl(Ui_RepeatRun):
             self.Repetitions.clear()
             return
         self.repeat_time = int(s)
-        # 先重置界面
+        # 先重置界面和数据库
         self.reset()
+        self.model.clean_database()
+        self.model.create_table()
         # 输出平均排队时间表
         self.tableWidget_avg_wait.removeRow(0)
         for every_time in range(self.repeat_time):
@@ -61,12 +79,16 @@ class RepeatControl(Ui_RepeatRun):
             self.model.reset()
             self.model.data_gen(int(self.num_people), int(self.max), int(self.min), self.probabilities)
             self.model.result_cal(int(self.num_people))
-            result = self.model.data_pool()
-            self.tableWidget_avg_wait.setItem(every_time, 1, QTableWidgetItem(str(round(result[8], 1))))
-            self.avg_list.append(result[8])
+            self.service, self.group_items = self.model.data_pool()
+            self.service_keys = list(self.service.keys())
+            self.group_items_keys = list(self.group_items.keys())
+            self.saveDatabase()
+            self.tableWidget_avg_wait.setItem(every_time, 1,
+                                              QTableWidgetItem(
+                                                  str(round(self.group_items[self.group_items_keys[0]], 1))))
+            self.avg_list.append(self.group_items[self.group_items_keys[0]])
 
         # 输出n次实验最大，最小，平均排队时间及实验次数
-        result = self.model.data_pool()
         self.MaxData.setText(str(round(np.max(self.avg_list), 1)))
         self.MinData.setText(str(round(np.min(self.avg_list), 1)))
         self.AverageDate.setText(str(round(float(np.mean(self.avg_list)), 1)))
@@ -75,13 +97,14 @@ class RepeatControl(Ui_RepeatRun):
 
         # 输出最后一次结果表
         self.tableWidget_last_result.removeRow(0)
-        for j in range(len(result[0])):
+        for j in range(len(self.service[self.service_keys[0]])):
             col_count = self.tableWidget_last_result.columnCount()
             self.tableWidget_last_result.insertRow(j)
             self.tableWidget_last_result.setVerticalHeaderItem(j, QTableWidgetItem(str(j + 1)))
             self.tableWidget_last_result.setItem(j, 0, QTableWidgetItem(str(j + 1)))
             for i in range(1, col_count):
-                self.tableWidget_last_result.setItem(j, i, QTableWidgetItem(str(result[i - 1][j])))
+                self.tableWidget_last_result.setItem(j, i,
+                                                     QTableWidgetItem(str(self.service[self.service_keys[i - 1]][j])))
 
     def reset(self):
         """
