@@ -165,8 +165,8 @@ class Model:
         sql_createDB = """
                         CREATE TABLE IF NOT EXISTS group_data(
                         group_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        avg_wait_time INT UNSIGNED,
-                        sys_util INT UNSIGNED
+                        avg_wait_time FLOAT(6, 2),
+                        sys_util FLOAT(6, 2)
                         )ENGINE=InnoDB DEFAULT CHARSET=utf8
                     """
 
@@ -274,7 +274,7 @@ class Model:
 
         data = list(data)
         for i in range(len(data)):
-            data[i] = int(data[i])
+            data[i] = float(data[i])
 
         conn = self.connect_db()
         cursor = conn.cursor()
